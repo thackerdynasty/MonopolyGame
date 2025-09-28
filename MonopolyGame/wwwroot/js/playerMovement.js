@@ -1,5 +1,13 @@
 let playerPosition = 0; // Start at "Go"
 
+//test player object
+/*
+let player1 = {
+    Id: 1,
+    TurnNumber: 1,
+    Money: 0,
+};*/
+
 function movePlayer(spacesToMove) {
     playerPosition = (playerPosition + spacesToMove) % boardSpaces.length;
     const space = boardSpaces[playerPosition];
@@ -14,4 +22,29 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("moveBtn").addEventListener("click", function() {
         movePlayer(1); // Move 1 space
     });
+});
+
+//Dice roller
+document.getElementById("rollDiceBtn").addEventListener("click", function() {
+    // Roll two dice (1–6)
+    const die1 = Math.floor(Math.random() * 6) + 1;
+    const die2 = Math.floor(Math.random() * 6) + 1;
+    const total = die1 + die2;
+    let isDouble = false;
+    if (die1 == die2){
+        isDouble = true;
+    }
+
+    // Display results
+    document.getElementById("diceResult").innerText =
+        `Die 1: ${die1}, Die 2: ${die2} — Move ${total} spaces`;
+    if(isDouble){
+        document.getElementById("diceResult").innerText += " DOUBLES!";
+    }
+    //move player
+    movePlayer(total);
+
+    document.getElementById("spaceResult").innerText =
+        `Player landed on the ${boardSpaces[playerPosition].name} space`;
+
 });
