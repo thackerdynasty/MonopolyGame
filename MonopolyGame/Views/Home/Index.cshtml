@@ -3,6 +3,17 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Monopoly!</h1>
 </div>
+
+<div style="position:relative; width:800px; height:800px;">
+    <img src="~/images/MonopolyBoard.jpg" alt="Monopoly Board" style="width:800px; height:800px;" />
+    <div id="player1" style="position:absolute; left:720px; top:720px; width:40px; height:40px; z-index:10;">
+        <img src="~/images/PlayerToken1.png" style="width:100%;" />
+    </div>
+</div>
+
+<button id="moveBtn">Move Player 1 Space</button>
+
+<script src="~/js/boardSpaces.js"></script>
+<script src="~/js/playerMovement.js"></script>
