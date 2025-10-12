@@ -1,12 +1,11 @@
 let playerPosition = 0; // Start at "Go"
 
-//test player object
-/*
-let player1 = {
-    Id: 1,
-    TurnNumber: 1,
-    Money: 0,
-};*/
+// Access the C# Player model data via window.playerData
+const players = window.playersData;
+players.forEach(player => {
+    console.log(`Player ${player.id}: ${player.name}, Turn: ${player.turnNumber}`);
+    // You can move each piece, update UI, etc.
+});
 
 function movePlayer(spacesToMove) {
     playerPosition = (playerPosition + spacesToMove) % boardSpaces.length;

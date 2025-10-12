@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<MonopolyGame.Models.Player>;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -20,6 +21,23 @@
     <span id="spaceResult" style="margin-left:15px; font-weight:bold;"></span>
 </div>
 
-
+<script>
+    window.playersData = [
+        @foreach(var p in Model)
+        {
+            <text>,
+                {
+                    id: @p.Id,
+                    turnNumber: @p.TurnNumber,
+                    name: "@p.Name",
+                },
+            </text>
+            @if (p != Model.Last())
+            {
+                <text>,</text>
+            }
+        }
+    ];
+</script>
 <script src="~/js/boardSpaces.js"></script>
 <script src="~/js/playerMovement.js"></script>

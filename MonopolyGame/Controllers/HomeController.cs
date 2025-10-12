@@ -15,7 +15,13 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var players = new List<Player>
+        {
+            new Player { Id = 1, TurnNumber = 1, Name = "Alice", Money = 200},
+            new Player { Id = 2, TurnNumber = 2, Name = "Bob", Money = 200}
+            // Add more players as needed
+        };
+        return View(players); // Pass list as model
     }
 
     public IActionResult Privacy()
