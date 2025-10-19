@@ -1,17 +1,11 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace MonopolyGame.Models;
 
-public class User
+public class User: IdentityUser
 {
-    [Key]
-    public int Id { get; set; }
-    
-    public string Username { get; set; }
-    public string Email { get; set; }
-    
     [ForeignKey("Game")]
-    public int GameId { get; set; }
-    public Game Game { get; set; }
+    public int? GameId { get; set; }
+    public Game? Game { get; set; }
 }
