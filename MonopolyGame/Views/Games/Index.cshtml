@@ -1,0 +1,29 @@
+@model List<Game>
+
+@{
+    ViewBag.Title = "Games";
+}
+
+<h1>Available Games</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Players</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var game in Model)
+    {
+        <tr>
+            <td>@game.Players</td>
+            <td>
+                @* <a href="@Url.Action("Details", "Games", new { id = game.Id })" class="btn btn-primary">View</a> *@
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@* create games *@
