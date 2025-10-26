@@ -170,6 +170,9 @@ namespace MonopolyGame.Migrations
                     b.Property<bool>("IsJoinable")
                         .HasColumnType("bit");
 
+                    b.Property<int>("MaxPlayers")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

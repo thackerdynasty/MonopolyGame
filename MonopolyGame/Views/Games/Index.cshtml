@@ -19,7 +19,7 @@
         <tr>
             <td>@game.Players</td>
             <td>
-                @* <a href="@Url.Action("Details", "Games", new { id = game.Id })" class="btn btn-primary">View</a> *@
+                <a asp-action="Join" class="btn btn-primary" asp-route-id="@game.Id">View</a>
             </td>
         </tr>
     }
@@ -27,3 +27,4 @@
 </table>
 
 @* create games *@
+<a asp-action="Create" class="btn btn-primary">Create a Game</a>

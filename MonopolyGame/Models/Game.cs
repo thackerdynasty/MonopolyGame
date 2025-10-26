@@ -15,4 +15,7 @@ public class Game
     
     [Required]
     public bool IsJoinable { get; set; }
+    
+    [Required]
+    public int MaxPlayers { get; set; }
 }

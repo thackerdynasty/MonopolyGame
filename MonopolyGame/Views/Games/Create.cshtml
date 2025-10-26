@@ -1,0 +1,16 @@
+@model Game
+
+@{
+    ViewBag.Title = "Create a Game";
+}
+
+<h1>Create a Game</h1>
+
+<form method="post">
+    <input asp-for="Name" placeholder="Name" class="form-control"></input>
+    <br/>
+    <label asp-for="MaxPlayers" class="form-label">Max Players</label>
+    <input asp-for="MaxPlayers" type="number" min="2" max="4" class="form-control" />
+    <br/>
+    <input type="submit" class="btn btn-primary" />
+</form>
