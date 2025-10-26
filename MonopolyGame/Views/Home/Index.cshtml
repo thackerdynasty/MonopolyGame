@@ -21,6 +21,15 @@
     <span id="spaceResult" style="margin-left:15px; font-weight:bold;"></span>
 </div>
 
+<ul>
+    @foreach (var player in Model)
+    {
+        <li>
+            <strong>Player @player.Id:</strong> @player.Name (Turn: @player.TurnNumber)
+        </li>
+    }
+</ul>
+
 <script>
     window.playersData = [
         @foreach(var p in Model)
@@ -38,6 +47,7 @@
             }
         }
     ];
+
 </script>
 <script src="~/js/boardSpaces.js"></script>
 <script src="~/js/playerMovement.js"></script>
