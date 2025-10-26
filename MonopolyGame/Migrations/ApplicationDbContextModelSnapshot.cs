@@ -167,6 +167,19 @@ namespace MonopolyGame.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsJoinable")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxPlayers")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Players")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Games");

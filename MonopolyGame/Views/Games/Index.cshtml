@@ -1,0 +1,30 @@
+@model List<Game>
+
+@{
+    ViewBag.Title = "Games";
+}
+
+<h1>Available Games</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Players</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var game in Model)
+    {
+        <tr>
+            <td>@game.Players</td>
+            <td>
+                <a asp-action="Join" class="btn btn-primary" asp-route-id="@game.Id">View</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@* create games *@
+<a asp-action="Create" class="btn btn-primary">Create a Game</a>
