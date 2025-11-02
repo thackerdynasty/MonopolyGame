@@ -1,6 +1,8 @@
-@model List<Player>;
+@model Game;
+@inject ApplicationDbContext _context;
 @{
     ViewData["Title"] = "Home Page";
+    List<Player> players = _context.Players.Where(p => p.GameId == Model.Id).ToList();
 }
 
 <div class="text-center">
@@ -22,7 +24,7 @@
 </div>
 
 <ul>
-    @foreach (var player in Model)
+    @foreach (var player in players)
     {
         <li>
             <strong>Player @player.Id:</strong> @player.Name (Turn: @player.TurnNumber)
@@ -32,7 +34,7 @@
 
 <script>
     window.playersData = [
-        @foreach(Player p in Model)
+        @foreach(Player p in players)
         {
             <text>,
                 {
@@ -41,12 +43,13 @@
                     name: "@p.Name",
                 },
             </text>
-            @if (p != Model.Last())
+            @if (p != players.Last())
             {
                 <text>,</text>
             }
         }
     ];
+    window.gameData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
 </script>
 <script src="~/js/boardSpaces.js"></script>
 <script src="~/js/playerMovement.js"></script>
