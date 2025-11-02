@@ -3,6 +3,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+<div id="turnMessage" style="font-size: 1.5em; margin: 20px 0; color: darkblue;">Testing Message</div>
+
 <div class="text-center">
     <h1 class="display-4">Welcome to Monopoly!</h1>
 </div>
@@ -12,9 +14,11 @@
     <div id="player1" style="position:absolute; left:720px; top:720px; width:40px; height:40px; z-index:10;">
         <img src="~/images/PlayerToken1.png" style="width:100%;" />
     </div>
+    <div id="player2" style="position:absolute; left:720px; top:720px; width:40px; height:40px; z-index:10;">
+        <img src="~/images/PlayerToken2.png" style="width:100%;" />
+    </div>
 </div>
 
-<button id="moveBtn">Move Player 1 Space</button>
 <div style="margin-bottom: 20px;">
     <button id="rollDiceBtn">Roll Dice</button>
     <span id="diceResult" style="margin-left:15px; font-weight:bold;"></span>
@@ -32,20 +36,17 @@
 
 <script>
     window.playersData = [
-        @foreach(var p in Model)
+        @for (int i = 0; i < Model.Count; i++)
         {
-            <text>,
-                {
-                    id: @p.Id,
-                    turnNumber: @p.TurnNumber,
-                    name: "@p.Name",
-                },
+            var p = Model[i];
+            <text>
+                { id: @p.Id, turnNumber: @p.TurnNumber, name: "@p.Name", position: "@p.Position" }
             </text>
-            @if (p != Model.Last())
-            {
-                <text>,</text>
+            @if (i < Model.Count - 1)
+                {
+                    <text>,</text>
+                }
             }
-        }
     ];
 
 </script>
