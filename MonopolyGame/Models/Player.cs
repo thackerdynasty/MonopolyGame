@@ -10,6 +10,7 @@ public class Player
     public string Name { get; set; }
     public int TurnNumber { get; set; }
     public int Money { get; set; }
+    public int Space { get; set; }
     
     [ForeignKey("Game")]
     public int GameId { get; set; }
