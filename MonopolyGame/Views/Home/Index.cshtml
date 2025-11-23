@@ -25,6 +25,31 @@
     <span id="spaceResult" style="margin-left:15px; font-weight:bold;"></span>
 </div>
 
+<div id="moneyBox" style="
+    position: fixed;
+    top: 50px;
+    right: 32px;
+    background: #fffbea;
+    border: 2px solid #e0c56e;
+    border-radius: 10px;
+    padding: 16px 18px;
+    min-width: 180px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+">
+    <strong>Money Totals</strong>
+    <ul id="moneyTotals" style="list-style: none; margin: 8px 0 0 0; padding: 0;"></ul>
+</div>
+
+<!-- Buy Property Card - Hidden by default -->
+<div id="buyPropertyCard" style="display:none; position:fixed; top:25%; left:50%; transform:translate(-50%, -25%); background:#fff4cc; border:2px solid #ffd700; border-radius:14px; padding:30px 40px; z-index:2000; box-shadow:0 4px 24px rgba(0,0,0,0.18); min-width:270px;">
+    <div id="buyPropertyInfo" style="margin-bottom:14px;">
+        <!-- JS fills in property details here -->
+    </div>
+    <button id="buyPropertyBtn" style="margin-right:10px; padding:6px 14px; background-color:#69c78c; border:none; border-radius:5px; color:#fff;">Buy</button>
+    <button id="skipPropertyBtn" style="padding:6px 14px; background-color:#f66; border:none; border-radius:5px; color:#fff;">Skip</button>
+</div>
+
 <ul>
     @foreach (var player in Model)
     {
@@ -40,7 +65,7 @@
         {
             var p = Model[i];
             <text>
-                { id: @p.Id, turnNumber: @p.TurnNumber, name: "@p.Name", position: "@p.Position" }
+                { id: @p.Id, turnNumber: @p.TurnNumber, name: "@p.Name", position: "@p.Position", money: @p.Money }
             </text>
             @if (i < Model.Count - 1)
                 {
