@@ -16,10 +16,22 @@ html {
     margin-left: 20px;
     border: black;
     border-style: solid; 
-    border-width: 1px; 
+    border-width: 2px; 
     flex: 1;
     border-radius: 5px;
 }
+
+.property-item { cursor: pointer; }
+.property-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: .5rem;
+    vertical-align: middle;
+}
+.property-link { text-decoration: none; color: inherit; }
+.chance-btn { min-width: 120px; }
 
 html {
   position: relative;
