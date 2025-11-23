@@ -18,7 +18,9 @@ public class HomeController : Controller
         var players = new List<Player>
         {
             new Player { Id = 1, TurnNumber = 1, Name = "Alice", Money = 200},
-            new Player { Id = 2, TurnNumber = 2, Name = "Bob", Money = 200}
+            new Player { Id = 2, TurnNumber = 2, Name = "Bob", Money = 200},
+            new Player { Id = 3, TurnNumber = 3, Name = "Tom", Money = 200},
+            new Player { Id = 4, TurnNumber = 4, Name = "Sally", Money = 200}
             // Add more players as needed
         };
         return View(players); // Pass list as model
