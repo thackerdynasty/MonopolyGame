@@ -11,4 +11,5 @@ public class ApplicationDbContext: IdentityDbContext<User>
     
     public DbSet<Game> Games { get; set; }
     public DbSet<Player> Players { get; set; }
+    public DbSet<Property> Properties { get; set; }
 }

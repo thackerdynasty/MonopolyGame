@@ -222,6 +222,67 @@ namespace MonopolyGame.Migrations
                     b.ToTable("Players");
                 });
 
+            modelBuilder.Entity("MonopolyGame.Models.Property", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BaseRent")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ColorGroup")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HotelPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HousePrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RentHotel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RentLvl1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RentLvl2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RentLvl3")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RentLvl4")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Properties");
+                });
+
             modelBuilder.Entity("MonopolyGame.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -360,6 +421,23 @@ namespace MonopolyGame.Migrations
                     b.Navigation("Game");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MonopolyGame.Models.Property", b =>
+                {
+                    b.HasOne("MonopolyGame.Models.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MonopolyGame.Models.Player", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Game");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("MonopolyGame.Models.User", b =>

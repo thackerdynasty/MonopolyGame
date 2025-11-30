@@ -136,6 +136,7 @@ public class GamesController : Controller
         };
         _context.Players.Add(player);
         await _context.SaveChangesAsync();
+        Util.Util.GenerateProperties(game, _context);
         return RedirectToAction("Index");
     }
 }
