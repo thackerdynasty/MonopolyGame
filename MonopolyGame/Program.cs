@@ -36,6 +36,10 @@ app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+app.MapAreaControllerRoute(
+    name: "api",
+    areaName: "Api",
+    pattern: "api/{controller}/{action=Index}/{id?}");
 
 
 app.Run();
