@@ -2,7 +2,8 @@ let currentPlayerIndex = 0;
 
 // Access the C# Player model data via window.playerData
 const players = window.playersData;
-//console.log("playersData in JS:", window.playersData);
+
+const game = window.gameData;
 players.forEach(player => {
     console.log(`Player ${player.id}: ${player.name}, Turn: ${player.turnNumber}`);
     // You can move each piece, update UI, etc.

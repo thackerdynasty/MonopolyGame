@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MonopolyGame.Models;
 
@@ -11,9 +12,11 @@ using MonopolyGame.Models;
 namespace MonopolyGame.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251102201004_Add players\n")]
+    partial class Addplayers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,9 +206,6 @@ namespace MonopolyGame.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Space")
-                        .HasColumnType("int");
-
                     b.Property<int>("TurnNumber")
                         .HasColumnType("int");
 
@@ -220,67 +220,6 @@ namespace MonopolyGame.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Players");
-                });
-
-            modelBuilder.Entity("MonopolyGame.Models.Property", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BaseRent")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ColorGroup")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HotelPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HousePrice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RentHotel")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RentLvl1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RentLvl2")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RentLvl3")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RentLvl4")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("Properties");
                 });
 
             modelBuilder.Entity("MonopolyGame.Models.User", b =>
@@ -421,23 +360,6 @@ namespace MonopolyGame.Migrations
                     b.Navigation("Game");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MonopolyGame.Models.Property", b =>
-                {
-                    b.HasOne("MonopolyGame.Models.Game", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MonopolyGame.Models.Player", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
-
-                    b.Navigation("Game");
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("MonopolyGame.Models.User", b =>

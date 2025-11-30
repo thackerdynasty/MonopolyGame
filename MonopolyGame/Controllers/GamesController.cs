@@ -73,8 +73,22 @@ public class GamesController : Controller
 
             // Keep in-memory object in sync (optional)
             user.GameId = id;
+            
+            // 3) Create player object and commit to db
+            var player = new Player
+            {
+                UserId = user.Id,
+                TurnNumber = 0,
+                Money = 1500,
+                Space = 0,
+                GameId = id,
+                Name = user.UserName
+            };
+            _context.Players.Add(player);
 
             await tx.CommitAsync();
+            await _context.SaveChangesAsync();
+            await _userManager.UpdateAsync(user);
             return RedirectToAction("MyGame");
         }
         catch
@@ -90,7 +104,7 @@ public class GamesController : Controller
         if (user == null) return RedirectToAction("Index", "Home");
         var game = _context.Games.FirstOrDefault(g => g.Id == user.GameId);
         // integrate the frontend game system here
-        throw new NotImplementedException();
+        return View(game);
     }
 
     public async Task<IActionResult> Create()
@@ -111,6 +125,18 @@ public class GamesController : Controller
         await _context.SaveChangesAsync();
         user.GameId = game.Id;
         await _userManager.UpdateAsync(user);
+        var player = new Player
+        {
+            UserId = user.Id,
+            TurnNumber = 0,
+            Money = 1500,
+            Space = 0,
+            GameId = game.Id,
+            Name = user.UserName
+        };
+        _context.Players.Add(player);
+        await _context.SaveChangesAsync();
+        Util.Util.GenerateProperties(game, _context);
         return RedirectToAction("Index");
     }
 }
