@@ -3,6 +3,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+<div id="turnMessage" style="font-size: 1.5em; margin: 20px 0; color: darkblue;">Testing Message</div>
+
 <div class="text-center">
     <h1 class="display-4">Welcome to Monopoly!</h1>
 </div>
@@ -12,13 +14,46 @@
     <div id="player1" style="position:absolute; left:720px; top:720px; width:40px; height:40px; z-index:10;">
         <img src="~/images/PlayerToken1.png" style="width:100%;" />
     </div>
+    <div id="player2" style="position:absolute; left:720px; top:720px; width:40px; height:40px; z-index:10;">
+        <img src="~/images/PlayerToken2.png" style="width:100%;" />
+    </div>
+    <div id="player3" style="position:absolute; left:720px; top:720px; width:40px; height:40px; z-index:10;">
+        <img src="~/images/PlayerToken3.png" style="width:100%;" />
+    </div>
+    <div id="player4" style="position:absolute; left:720px; top:720px; width:40px; height:40px; z-index:10;">
+        <img src="~/images/PlayerToken4.png" style="width:100%;" />
+    </div>
 </div>
 
-<button id="moveBtn">Move Player 1 Space</button>
 <div style="margin-bottom: 20px;">
     <button id="rollDiceBtn">Roll Dice</button>
     <span id="diceResult" style="margin-left:15px; font-weight:bold;"></span>
     <span id="spaceResult" style="margin-left:15px; font-weight:bold;"></span>
+</div>
+
+<div id="moneyBox" style="
+    position: fixed;
+    top: 50px;
+    right: 32px;
+    background: #fffbea;
+    border: 2px solid #e0c56e;
+    border-radius: 10px;
+    padding: 16px 18px;
+    min-width: 180px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+">
+    <strong>Money Totals</strong>
+    <ul id="moneyTotals" style="list-style: none; margin: 8px 0 0 0; padding: 0;"></ul>
+</div>
+
+<!-- Buy Property Card - Hidden by default -->
+<div id="buyPropertyCard" style="display:none; position:fixed; top:25%; left:50%; transform:translate(-50%, -25%); background:#fff4cc; border:2px solid #ffd700; border-radius:14px; padding:30px 40px; z-index:2000; box-shadow:0 4px 24px rgba(0,0,0,0.18); min-width:270px;">
+    <div id="buyPropertyInfo" style="margin-bottom:14px;">
+        <!-- JS fills in property details here -->
+    </div>
+    <button id="buyPropertyBtn" style="margin-right:10px; padding:6px 14px; background-color:#69c78c; border:none; border-radius:5px; color:#fff;">Buy</button>
+    <button id="skipPropertyBtn" style="padding:6px 14px; background-color:#f66; border:none; border-radius:5px; color:#fff;">Skip</button>
 </div>
 
 <ul>
@@ -32,20 +67,17 @@
 
 <script>
     window.playersData = [
-        @foreach(var p in Model)
+        @for (int i = 0; i < Model.Count; i++)
         {
-            <text>,
-                {
-                    id: @p.Id,
-                    turnNumber: @p.TurnNumber,
-                    name: "@p.Name",
-                },
+            var p = Model[i];
+            <text>
+                { id: @p.Id, turnNumber: @p.TurnNumber, name: "@p.Name", position: "@p.Position", money: @p.Money }
             </text>
-            @if (p != Model.Last())
-            {
-                <text>,</text>
+            @if (i < Model.Count - 1)
+                {
+                    <text>,</text>
+                }
             }
-        }
     ];
 
 </script>
