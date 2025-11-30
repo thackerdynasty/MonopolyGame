@@ -41,9 +41,8 @@ function movePlayer(spacesToMove) {
     playerDiv.style.left = space.x + "px";
     playerDiv.style.top = space.y + "px";
     
-    if (space.owner == null){
-        //TODO: make property object and get the buy property values to show up
-        showBuyPropertyCard(null, player);
+    if (space.owner == null && space.type === "property") {
+        showBuyPropertyCard(space, player);
     }
 }
 
@@ -62,12 +61,9 @@ function updateMoneyTotals() {
 function showBuyPropertyCard(property, player) {
     // Fill in content
     document.getElementById('buyPropertyInfo').innerHTML =
-        `<strong>${player.name}</strong> landed on <strong>property</strong>!<br>
-        Price: <span style="color:green;">$100</span><br>
-        Do you want to buy this property?`;
-        //`<strong>${player.name}</strong> landed on <strong>${property.name}</strong>!<br>
-         //Price: <span style="color:green;">$${property.price}</span><br>
-         //Do you want to buy this property?`;
+        `<strong>${player.name}</strong> landed on <strong>${property.name}</strong>!<br>
+         Price: <span style="color:green;">$${property.price}</span><br>
+         Do you want to buy this property?`;
     // Show modal
     document.getElementById('buyPropertyCard').style.display = 'block';
 }
