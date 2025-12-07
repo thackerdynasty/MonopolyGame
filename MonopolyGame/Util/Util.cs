@@ -117,7 +117,7 @@ public static class Util
         // Railroads
         AddRailroad("Reading Railroad");
         AddRailroad("Pennsylvania Railroad");
-        AddRailroad("B. & O. Railroad");
+        AddRailroad("B&O Railroad");
         AddRailroad("Short Line");
 
         // Utilities

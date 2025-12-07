@@ -12,7 +12,7 @@
 
 <div class="d-flex flex-row">
     <div>
-        <div df="turnMessage" style="font-size: 1.5em; margin: 20px 0; color: darkblue;">Testing Message</div>
+        <div id="turnMessage" style="font-size: 1.5em; margin: 20px 0; color: darkblue;">Testing Message</div>
 
         <div class="text-center">
             <h1 class="display-4">Welcome to Monopoly!</h1>
@@ -40,21 +40,21 @@
             <span id="spaceResult" style="margin-left:15px; font-weight:bold;"></span>
         </div>
 
-        <div id="moneyBox" style="
-    position: fixed;
-    top: 50px;
-    right: 32px;
-    background: #fffbea;
-    border: 2px solid #e0c56e;
-    border-radius: 10px;
-    padding: 16px 18px;
-    min-width: 180px;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-">
-            <strong>Money Totals</strong>
-            <ul id="moneyTotals" style="list-style: none; margin: 8px 0 0 0; padding: 0;"></ul>
-        </div>
+@*         <div id="moneyBox" style=" *@
+@*             position: fixed; *@
+@*             top: 50px; *@
+@*             right: 32px; *@
+@*             background: #fffbea; *@
+@*             border: 2px solid #e0c56e; *@
+@*             border-radius: 10px; *@
+@*             padding: 16px 18px; *@
+@*             min-width: 180px; *@
+@*             z-index: 1000; *@
+@*             box-shadow: 0 2px 8px rgba(0,0,0,0.1); *@
+@* "> *@
+@*             <strong>Money Totals</strong> *@
+@*             <ul id="moneyTotals" style="list-style: none; margin: 8px 0 0 0; padding: 0;"></ul> *@
+@*         </div> *@
 
         <!-- Buy Property Card - Hidden by default -->
         <div id="buyPropertyCard"
@@ -146,7 +146,7 @@
 
 
 <script>
-    window.playersData = [
+    @* window.playersData = [
         @foreach (Player p in players)
         {
             <text>,
@@ -161,8 +161,9 @@
                 <text>,</text>
             }
         }
-    ];
-    window.gameData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
+    ]; *@
+    window.playersData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(players, new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase }));
+    window.gameData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model, new System.Text.Json.JsonSerializerOptions { PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase }));
 </script>
 <script src="~/js/boardSpaces.js"></script>
 <script src="~/js/playerMovement.js"></script>

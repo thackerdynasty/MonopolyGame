@@ -25,6 +25,25 @@ public class PlayerController : ControllerBase
             return NotFound();
         return Ok(player);
     }
+    
+    [HttpPost("SaveAll")]
+    public IActionResult SaveAll([FromBody] List<Player> players)
+    {
+        foreach (var updatedPlayer in players)
+        {
+            var player = _context.Players.Find(updatedPlayer.Id);
+            if (player != null)
+            {
+                _context.Entry(player).CurrentValues.SetValues(updatedPlayer);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        _context.SaveChanges();
+        return Ok();
+    }
 
     [HttpPut("{id}")]
     public IActionResult Update(int id, [FromBody] Player updatedPlayer)
@@ -36,10 +55,7 @@ public class PlayerController : ControllerBase
         var player = _context.Players.Find(id);
         if (player == null)
             return NotFound();
-        player.Name = updatedPlayer.Name;
-        player.Money = updatedPlayer.Money;
-        player.Space = updatedPlayer.Space;
-        player.TurnNumber = updatedPlayer.TurnNumber;
+        _context.Entry(player).CurrentValues.SetValues(updatedPlayer);
         _context.SaveChanges();
         return Ok(player);
     }

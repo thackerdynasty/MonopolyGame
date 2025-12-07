@@ -33,7 +33,7 @@ const boardSpaces = [
     { name: "Atlantic Avenue", x: 450, y: 0, width: 80, height: 80, owner: null, type: "property", price: 260 },
     { name: "Ventnor Avenue", x: 500, y: 0, width: 80, height: 80, owner: null, type: "property", price: 260 },
     { name: "Water Works", x: 560, y: 0, width: 80, height: 80, owner: null, type: "property", price: 150 },
-    { name: "Marvin Gardens", x: 640, y: 0, width: 80, height: 80, owner: null, type: "property", price: 260 },
+    { name: "Marvin Gardens", x: 640, y: 0, width: 80, height: 80, owner: null, type: "property", price: 280 },
 
     // Right column (top to bottom)
     { name: "Go To Jail", x: 720, y: 0, width: 80, height: 80, owner: null, type: "event" },

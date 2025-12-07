@@ -203,6 +203,9 @@ namespace MonopolyGame.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
+
                     b.Property<int>("Space")
                         .HasColumnType("int");
 

@@ -24,10 +24,24 @@ function showTurnMessage() {
 }
 
 function nextTurn() {
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-    showTurnMessage();
-
-    
+    const playersJson = JSON.stringify(players);
+    console.log("Updating players on server: " + playersJson);
+    fetch("/api/Player/SaveAll", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: playersJson
+    }).then(response => {
+        if (!response.ok) {
+            console.error("Could not update player data on server.");
+            throw new Error("Network response was not ok");
+        } else {
+            console.log("Player data updated successfully on server.");
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+            showTurnMessage();
+        }
+    });
 }
 
 function movePlayer(spacesToMove) {
@@ -44,6 +58,8 @@ function movePlayer(spacesToMove) {
     
     if (space.owner == null && space.type === "property") {
         showBuyPropertyCard(space, player);
+    } else {
+        nextTurn();
     }
 }
 
@@ -81,11 +97,13 @@ document.getElementById('buyPropertyBtn').addEventListener('click', function() {
     hideBuyPropertyCard();
     alert("Property purchased! (Add your own logic here.)");
     // Also: You probably want to call updateMoneyTotals() and refresh any ownership visuals.
+    nextTurn();
 });
 
 document.getElementById('skipPropertyBtn').addEventListener('click', function() {
     hideBuyPropertyCard();
     // Your code to continue the turn (e.g., next player or auction)
+    nextTurn();
 });
 
 //Dice roller
@@ -106,7 +124,7 @@ document.getElementById("rollDiceBtn").addEventListener("click", function() {
     // Disable the button so it can’t be clicked again this turn
     document.getElementById("rollDiceBtn").disabled = true;
     
-    setTimeout(nextTurn, 3000); // Wait 2 seconds, then move to next player's turn
+    // setTimeout(nextTurn, 3000); // Wait 2 seconds, then move to next player's turn
 
     // Display results
     document.getElementById("diceResult").innerText =
