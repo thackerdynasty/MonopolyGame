@@ -70,8 +70,8 @@
         @for (int i = 0; i < Model.Count; i++)
         {
             var p = Model[i];
-            <text>
-                { id: @p.Id, turnNumber: @p.TurnNumber, name: "@p.Name", position: "@p.Position", money: @p.Money }
+            <text>,
+                { id: @p.Id, turnNumber: @p.TurnNumber, name: "@p.Name", position: "@p.Position", money: @p.Money },
             </text>
             @if (i < Model.Count - 1)
                 {
